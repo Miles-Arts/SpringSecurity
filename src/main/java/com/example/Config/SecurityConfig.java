@@ -85,7 +85,7 @@ public class SecurityConfig {
                      .invalidSessionUrl("/login")
                     .maximumSessions(1)
                     .expiredUrl("/login")
-                    .sessionRegistry()
+                    .sessionRegistry(sessionRegistry())
                 .and()
                 .sessionFixation()
                     .migrateSession()//.none()//.newSession()//.migrateSession()//Migrate Session .newSession - none
