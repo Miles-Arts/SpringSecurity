@@ -80,6 +80,9 @@ public class SecurityConfig {
                 .and()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)//Diferent Options: ALWAYS- If_REQUIRED - NEVER - STATELESS
+                .invalidSessionUrl("/login")
+                .maximumSessions(1)
+                .expiredUrl("/login")
                 .and()
                 .build();
     }
