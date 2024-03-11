@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -80,12 +82,23 @@ public class SecurityConfig {
                 .and()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)//Diferent Options: ALWAYS- If_REQUIRED - NEVER - STATELESS
-                .invalidSessionUrl("/login")
-                .maximumSessions(1)
-                .expiredUrl("/login")
+                     .invalidSessionUrl("/login")
+                    .maximumSessions(1)
+                    .expiredUrl("/login")
+                    .sessionRegistry()
+                .and()
+                .sessionFixation()
+                    .migrateSession()//.none()//.newSession()//.migrateSession()//Migrate Session .newSession - none
                 .and()
                 .build();
     }
+
+    @Bean
+    public SessionRegistry sessionRegistry()
+    {
+        return new SessionRegistryImpl();
+    }
+
     public AuthenticationSuccessHandler successHandler()
     {
         return ((request, response, authentication) -> {
