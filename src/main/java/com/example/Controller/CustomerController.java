@@ -56,8 +56,11 @@ public class CustomerController {
         }
 
         Map<String, Object> response = new HashMap<>();
-        response.put("Response", "Hello Word");
+        response.put("response", "Hello Word");
+        response.put("sessionId", sessionId);
+        response.put("SessionUser", userObject);
 
-        return (ResponseEntity<?>) ResponseEntity.ok();
+        //return (ResponseEntity<?>) ResponseEntity.ok();
+        return (ResponseEntity<?>) ResponseEntity.ok(response);
     }
 }

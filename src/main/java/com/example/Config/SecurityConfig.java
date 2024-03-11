@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 public class SecurityConfig {
 
 
-  /*  //CONFIGURATION ONE
+    //CONFIGURATION ONE
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -25,10 +25,12 @@ public class SecurityConfig {
                 .and()
                 .formLogin().permitAll()
                 .and()
+                //.httpBasic()
+               // .and()
                 .build();
         //CSRF Cross-Site Request Forgery
         //Nunca Desactiva para formularios
-    }*/
+    }
 
     //CONFIGURATION TWO
     /*@Bean
@@ -68,7 +70,7 @@ public class SecurityConfig {
     }*/
 
     //CONFIGURATION the SESSION
-    @Bean
+  /*  @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception
     {
         return httpSecurity
@@ -90,8 +92,10 @@ public class SecurityConfig {
                 .sessionFixation()
                     .migrateSession()//.none()//.newSession()//.migrateSession()//Migrate Session .newSession - none
                 .and()
+                .httpBasic()
+                .and()
                 .build();
-    }
+    }*/
 
     @Bean
     public SessionRegistry sessionRegistry()
@@ -102,7 +106,8 @@ public class SecurityConfig {
     public AuthenticationSuccessHandler successHandler()
     {
         return ((request, response, authentication) -> {
-            response.sendRedirect("/v1/index");
+            //response.sendRedirect("/v1/index");
+            response.sendRedirect("/v1/session");
         });
     }
 
