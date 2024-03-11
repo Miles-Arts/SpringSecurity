@@ -10,6 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+
+  /*  //CONFIGURATION ONE
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -22,5 +24,20 @@ public class SecurityConfig {
                 .build();
         //CSRF Cross-Site Request Forgery
         //Nunca Desactiva para formularios
+    }*/
+
+    //CONFIGURATION TWO
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception
+    {
+        return httpSecurity
+                .authorizeHttpRequests( auth -> {
+                    auth.requestMatchers("/v1/index2").permitAll();
+                    auth.anyRequest().authenticated();
+                })
+                .formLogin().permitAll()
+                .and()
+                .build();
     }
+
 }
